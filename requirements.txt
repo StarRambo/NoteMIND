@@ -1,5 +1,5 @@
-# requirements.txt  – one line does the trick
-llama-index==0.10.39      # meta-package pins core + plugins that match
 streamlit
 openai
 sentence-transformers
+llama-index-core==0.12.48
+llama-index-embeddings-huggingface==0.4.1   # note: ≥0.4.0 supports core 0.12
