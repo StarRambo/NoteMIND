@@ -1,5 +1,5 @@
-# requirements.txt  (recommended – easiest to maintain)
-streamlit==1.46.1
-openai==1.12.0
-sentence-transformers==5.0.0
-llama-index==0.11.29          # includes the HuggingFaceEmbedding class
+# requirements.txt  – one line does the trick
+llama-index==0.10.39      # meta-package pins core + plugins that match
+streamlit
+openai
+sentence-transformers
