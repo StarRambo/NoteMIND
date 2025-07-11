@@ -12,9 +12,16 @@ if not api_key:
     st.error("Missing OPENAI_API_KEY – add it in Streamlit > Secrets!")
     st.stop()
 
-llm          = OpenAI(api_key=api_key, model="gpt-3.5-turbo")
-embed_model  = OpenAIEmbedding(api_key=api_key)
-svc_ctx      = ServiceContext.from_defaults(llm=llm, embed_model=embed_model)
+# --- imports ---
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.openai import OpenAI
+
+api_key = os.getenv("OPENAI_API_KEY")
+
+llm         = OpenAI(api_key=api_key, model="gpt-3.5-turbo")
+embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+svc_ctx = ServiceContext.from_defaults(llm=llm, embed_model=embed_model)
 
 # ―― 2. Upload & index docs ――――――――――――――――――――――――――――――――――――――――
 os.makedirs("data", exist_ok=True)
