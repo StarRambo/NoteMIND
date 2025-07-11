@@ -1,3 +1,4 @@
 streamlit
 llama-index==0.10.39
+sentence-transformers
 openai
