@@ -13,13 +13,13 @@ if not api_key:
     st.stop()
 
 # --- imports ---
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.openai import OpenAI
+from llama_index.embeddings import HuggingFaceEmbedding    # ✅ works with 0.11
+from llama_index.llms import OpenAI
+from llama_index import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 
-api_key = os.getenv("OPENAI_API_KEY")
-
-llm         = OpenAI(api_key=api_key, model="gpt-3.5-turbo")
-embed_model = HuggingFaceEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
+HF_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+embed_model = HuggingFaceEmbedding(model_name=HF_MODEL)    # local, no API key
+llm         = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-3.5-turbo")
 
 svc_ctx = ServiceContext.from_defaults(llm=llm, embed_model=embed_model)
 
